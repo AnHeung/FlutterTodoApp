@@ -4,7 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:todo_test/blocs/todo/todo_bloc.dart';
 import 'package:todo_test/blocs/todo/todo_state.dart';
-import 'package:todo_test/models/models/models.dart';
+import 'package:todo_test/models/todo.dart';
+import 'package:todo_test/models/visibility_filter.dart';
 
 import 'filtered_todo.dart';
 

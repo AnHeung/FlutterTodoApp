@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:todo_test/models/models/app_tab.dart';
+import 'package:todo_test/models/app_tab.dart';
 
 abstract class TabEvent extends Equatable{
   const TabEvent();

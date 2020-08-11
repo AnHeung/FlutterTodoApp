@@ -1,15 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_test/blocs/todo/todo_event.dart';
 import 'package:todo_test/blocs/todo/todo_state.dart';
 import 'package:todo_test/blocs/todo/todos.dart';
-import 'package:todo_test/models/models/models.dart';
 import 'package:todos_repository_simple/todos_repository_simple.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState>{
 
-   TodosRepositoryFlutter repository;
+   final TodosRepositoryFlutter repository;
 
-  TodoBloc(TodoState initialState) : super(initialState);
+  TodoBloc({@required this.repository}) : super(TodoLoadingInProgress());
 
   @override
   Stream<TodoState> mapEventToState(TodoEvent event) async*{
