@@ -1,6 +1,6 @@
 # todo_test
 
-A new Flutter application.
+플러터 ToDo 앱 
 
 ## Getting Started
 
