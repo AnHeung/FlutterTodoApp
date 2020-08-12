@@ -4,9 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_test/blocs/filtered_todo/filtered_todo.dart';
 import 'package:todo_test/screen/detail_screen.dart';
-import 'package:todo_test/widget/delete_snack_bar.dart';
-import 'package:todo_test/widget/loading_indicator.dart';
-import 'package:todo_test/widget/todo_item.dart';
+import 'widgets.dart';
 import 'package:todos_app_core/todos_app_core.dart';
 import 'package:todo_test/blocs/blocs.dart';
 import 'package:todo_test/flutter_todos_keys.dart';
@@ -34,14 +32,13 @@ class FilterTodo extends StatelessWidget {
                   Scaffold.of(context).showSnackBar(DeleteSnackBar(
                     key: ArchSampleKeys.snackbar,
                     todo: todo,
-                    onUndo: () =>
-                        BlocProvider.of<TodoBloc>(context).add(TodoAdd(addedTodos: todo)),
+                    onUndo: () => BlocProvider.of<TodoBloc>(context).add(TodoAdd(addedTodos: todo)),
                     localizations: localization,
                   ));
                 },
                 onTap: () async {
                   final removedTodo = await Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => DetailScreen()));
+                      .push(MaterialPageRoute(builder: (_) => DetailScreen(id: todo.id,)));
 
                   if (removedTodo != null) {
                     Scaffold.of(context).showSnackBar(DeleteSnackBar(

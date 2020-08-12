@@ -5,3 +5,4 @@ export 'filter_todos.dart';
 export 'todo_item.dart';
 export 'stats.dart';
 export 'loading_indicator.dart';
+export 'tab_selector.dart';

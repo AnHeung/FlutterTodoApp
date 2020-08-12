@@ -4,26 +4,27 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_test/blocs/simple_bloc_observer.dart';
 import 'package:todo_test/blocs/stat/stats.dart';
+import 'package:todo_test/models/models.dart';
+import 'package:todo_test/screen/add_edit_screen.dart';
 import 'package:todo_test/screen/home_screen.dart';
 import 'package:todos_repository_simple/todos_repository_simple.dart';
 import 'blocs/blocs.dart';
 import 'package:todos_app_core/todos_app_core.dart';
 import 'package:todo_test/localization.dart';
 
-
 void main() {
-  Bloc.observer  = SimpleBlocObserver();
+  Bloc.observer = SimpleBlocObserver();
   runApp(BlocProvider(
-      create: (context) {
-        return TodoBloc(
-          repository: const TodosRepositoryFlutter(
-            fileStorage: const FileStorage(
-              '__flutter_bloc_app__',
-              getApplicationDocumentsDirectory,
-            ),
+    create: (context) {
+      return TodoBloc(
+        repository: const TodosRepositoryFlutter(
+          fileStorage: const FileStorage(
+            '__flutter_bloc_app__',
+            getApplicationDocumentsDirectory,
           ),
-        )..add(TodoLoaded());
-      },
+        ),
+      )..add(TodoLoaded());
+    },
     child: TodoApp(),
   ));
 }
@@ -39,7 +40,7 @@ class TodoApp extends StatelessWidget {
         FlutterBlocLocalizationsDelegate(),
       ],
       routes: {
-        ArchSampleRoutes.home :(context){
+        ArchSampleRoutes.home: (context) {
           return MultiBlocProvider(
             providers: [
               BlocProvider<TabBloc>(
@@ -59,11 +60,13 @@ class TodoApp extends StatelessWidget {
             child: HomeScreen(),
           );
         },
+        ArchSampleRoutes.addTodo: (context) => AddEditScreen(
+              isEditing: false,
+              key: ArchSampleKeys.addTodoScreen,
+              onSaveCallback: (task, note) => BlocProvider.of<TodoBloc>(context)
+                  .add(TodoAdd(addedTodos: Todo(task, note: note))),
+            )
       },
     );
   }
 }
-
-
-
-

@@ -61,7 +61,7 @@ class Stats extends StatelessWidget {
         }
 
 
-        return Container();
+        return Container(key: FlutterTodosKeys.emptyStatsContainer,);
       },
     );
   }
