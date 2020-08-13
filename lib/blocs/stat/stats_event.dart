@@ -9,6 +9,8 @@ abstract class StatsEvent extends Equatable{
   List<Object> get props => [];
 }
 
+class StatsInitialize extends StatsEvent{}
+
 class StatsUpdate extends StatsEvent{
 
   final List<Todo> updateList;

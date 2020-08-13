@@ -54,7 +54,7 @@ class TodoApp extends StatelessWidget {
               BlocProvider<StatsBloc>(
                 create: (context) => StatsBloc(
                   todoBloc: BlocProvider.of<TodoBloc>(context),
-                ),
+                )..add(StatsInitialize()),
               ),
             ],
             child: HomeScreen(),

@@ -22,6 +22,10 @@ class TodoBloc extends Bloc<TodoEvent, TodoState>{
       yield* _mapToTodoDelete(event);
     }else if(event is TodoAdd){
       yield* _mapToTodoAdd(event);
+    }else if(event is ClearCompleted){
+      yield* _mapToClearComplete();
+    }else if(event is ToggleAll){
+      yield* _mapToMarkedAll();
     }
   }
 
@@ -57,6 +61,24 @@ class TodoBloc extends Bloc<TodoEvent, TodoState>{
       _saveTodos(addTodo);
     }
   }
+
+  Stream<TodoState> _mapToClearComplete() async*{
+    if(state is TodoLoadSuccess){
+      final List<Todo> clearList = (state as TodoLoadSuccess).loadTodos
+          .where((todo) => !todo.complete)
+          .toList();
+      yield TodoLoadSuccess(clearList);
+      _saveTodos(clearList);
+    }
+  }
+
+   Stream<TodoState> _mapToMarkedAll() async*{
+     if(state is TodoLoadSuccess){
+        final List<Todo> updateList = (state as TodoLoadSuccess).loadTodos.map((todo) =>  todo.copyWith(complete: !todo.complete)).toList();
+        yield TodoLoadSuccess(updateList);
+        _saveTodos(updateList);
+     }
+   }
 
   Future _saveTodos(List<Todo> todos)=> repository.saveTodos(todos.map((todo) => todo.toEntity()).toList());
 

@@ -21,7 +21,7 @@ class TodoUpdate extends TodoEvent{
   List<Object> get props => [updateTodos];
 
   @override
-  String toString() =>'Todoupdated data :$updateTodos';
+  String toString() =>'TodoUpdated data :$updateTodos';
 
 }
 
@@ -35,7 +35,7 @@ class TodoAdd extends TodoEvent{
   List<Object> get props => [addedTodos];
 
   @override
-  String toString() => 'Todoadded Data : $addedTodos';
+  String toString() => 'TodoAdded Data : $addedTodos';
 }
 
 class TodoDelete extends TodoEvent{

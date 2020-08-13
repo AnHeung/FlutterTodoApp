@@ -39,12 +39,14 @@ class FilteredTodoBloc extends Bloc<FilteredTodoEvent, FilteredTodoState> {
 
   Stream<FilteredTodoState> _mapFilterUpdateToState(FilterUpdate event) async*{
       if(todoBloc.state is TodoLoadSuccess){
-        yield FilteredTodosLoadSuccess((todoBloc.state as TodoLoadSuccess).loadTodos, event.filter);
+        yield FilteredTodosLoadSuccess(_mapTodosToFilteredTodos((todoBloc.state as TodoLoadSuccess).loadTodos , event.filter), event.filter);
       }
   }
 
   Stream<FilteredTodoState> _mapTodoUpdateToState(FilterTodoUpdate event) async*{
-    final visibilityFilter  = state is FilteredTodosLoadSuccess ? (state as FilteredTodosLoadSuccess).activeFilter : VisibilityFilter.all;
+    final visibilityFilter  = state is FilteredTodosLoadSuccess
+        ? (state as FilteredTodosLoadSuccess).activeFilter
+        : VisibilityFilter.all;
 
     yield FilteredTodosLoadSuccess(_mapTodosToFilteredTodos((todoBloc.state as TodoLoadSuccess).loadTodos, visibilityFilter), visibilityFilter);
 
